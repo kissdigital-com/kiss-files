@@ -11,9 +11,10 @@
 |
 */
 
-Route::get('/', 'UploadController@index');
+Route::get('/', 'UploadController@index')->middleware('auth');
 Route::post('/upload', 'UploadController@chunkUpload');
 Route::get('/upload', 'UploadController@chunkCheck');
 
-Route::get('login/google', 'Auth\LoginController@redirectToProvider');
+Route::get('logout', 'Auth\LoginController@logout')->middleware('auth');
+Route::get('login/google', 'Auth\LoginController@redirectToProvider')->name('login');
 Route::get('login/google/callback', 'Auth\LoginController@handleProviderCallback');

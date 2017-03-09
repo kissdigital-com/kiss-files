@@ -69,7 +69,7 @@ class ChunkyUploader
         return true;
     }
 
-    public static function clean(Request $request)
+    public static function clean(Request $request) : void
     {
         Storage::deleteDirectory(self::getChunkDirectory($request));
     }

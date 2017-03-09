@@ -37,7 +37,8 @@ No links
 No test data
 
 ## Tips and tricks ##
-No tips
+
+1. Jeżeli uruchamiasz serwis lokalnie to aby działało uwierzytelnianie z google, postaw go pod nie-lokalną domeną, a w swoim /etc/hosts podaje tylko lokalne IP. Rzecz w tym, że po uwierzytelnieniu google przekierowuje użytkownika na wskazany adres - ale nie może on być lokalny.
 
 ## Contributors ##
 Adam Kubiczek

@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('content')
-  <h1>Hello</h1>
+  <h1>Hello {{ $user->name }}</h1>
 
   <div class="resumable-drop" id="browseButton" style="width:500px;height:400px;border:1px solid red;">
     Drop files here to upload or <a class="resumable-browse"><u>select from your computer</u></a>

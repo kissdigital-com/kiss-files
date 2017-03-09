@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Log;
 use App\Services\ChunkyUploader;
+use Auth;
+use Illuminate\Support\Facades\View;
 
 class UploadController extends Controller
 {
@@ -14,7 +16,7 @@ class UploadController extends Controller
      */
     public function index()
     {
-        return view('upload');
+        return view('upload')->with('user', Auth::user());
     }
 
     /**

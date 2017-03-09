@@ -36,6 +36,8 @@
         </style>
     </head>
     <body>
+    <a href="{{ action('Auth\LoginController@logout') }}">Wyloguj</a>
+
             @yield('content')
 
             @yield('scripts')
