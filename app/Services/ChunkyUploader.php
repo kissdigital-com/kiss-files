@@ -34,7 +34,7 @@ class ChunkyUploader
         return false;
     }
 
-    public static function mergeUploadedFile(Request $request) : bool
+    public static function mergeUploadedFile(Request $request) : string
     {
         $resumableTotalChunks = $request->input('resumableTotalChunks', 0);
         $resumableFilename =  $request->input('resumableFilename', '');
@@ -66,7 +66,7 @@ class ChunkyUploader
 
         fclose($fp);
 
-        return true;
+        return $targetFilePath;
     }
 
     public static function clean(Request $request) : void

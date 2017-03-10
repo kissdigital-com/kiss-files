@@ -15,6 +15,8 @@ Route::get('/', 'UploadController@index')->middleware('auth');
 Route::post('/upload', 'UploadController@chunkUpload');
 Route::get('/upload', 'UploadController@chunkCheck');
 
+Route::get('/download/{accessKey}/{fileName?}', 'DownloadController@download');
+
 Route::get('logout', 'Auth\LoginController@logout')->middleware('auth');
 Route::get('login/google', 'Auth\LoginController@redirectToProvider')->name('login');
 Route::get('login/google/callback', 'Auth\LoginController@handleProviderCallback');

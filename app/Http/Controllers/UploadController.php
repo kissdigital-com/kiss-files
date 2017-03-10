@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Log;
 use App\Services\ChunkyUploader;
+use App\Services\FileService;
 use Auth;
 use Illuminate\Support\Facades\View;
 
@@ -45,8 +46,11 @@ class UploadController extends Controller
 
         if (ChunkyUploader::isUploadCompleted($request))
         {
-            ChunkyUploader::mergeUploadedFile($request);
+            $filePath = ChunkyUploader::mergeUploadedFile($request);
             ChunkyUploader::clean($request);
+
+            $downloadURL = FileService::storeUploadedFile($request->input('resumableFilename'), $filePath, Auth::user());
+            return response()->json(['url' => $downloadURL]);
         }
 
         return response('File received', 200);
