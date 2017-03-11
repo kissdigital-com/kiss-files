@@ -228,6 +228,8 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
+        'HumanReadable' => App\Helpers\HumanReadable::class,
+        'FileService' => App\Services\FileService::class,
 
     ],
 

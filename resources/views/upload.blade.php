@@ -7,9 +7,20 @@
         Drop files here to upload or <a class="resumable-browse"><u>select from your computer</u></a>
     </div>
 
+    @foreach ($files as $file)
+        <div class="row fileItem">
+            <div class="col-md-6"><input type="text" style="width:100%" value="{{ $file->path }}"/></div>
+            <div class="col-md-1">{{ \App\Helpers\HumanReadable::bytesToHuman($file->size) }}</div>
+            <div class="col-md-1">{{ $file->created_at->format('d.m.Y') }}</div>
+            <div class="col-md-4">
+                <a href="{{ \App\Services\FileService::downloadURL($file) }}">Pobierz</a>
+                <a href="{{ action('FilesController@delete', [$file->access_key]) }}">Usuń</a></div>
+        </div>
+    @endforeach
 
+    <div id="fileList">
 
-    <div id="fileList"></div>
+    </div>
 
 
 @endsection
@@ -32,8 +43,7 @@
                 $('#progress-' + file.uniqueIdentifier).css('width', progress + '%');
             }
 
-            completed(file, result)
-            {
+            completed(file, result) {
                 alert(result.url);
             }
         }

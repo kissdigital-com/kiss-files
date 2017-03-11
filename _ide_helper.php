@@ -1,7 +1,7 @@
 <?php
 /**
  * A helper file for Laravel 5, to provide autocomplete information to your IDE
- * Generated for Laravel 5.4.15 on 2017-03-10.
+ * Generated for Laravel 5.4.15 on 2017-03-11.
  *
  * @author Barry vd. Heuvel <barryvdh@gmail.com>
  * @see https://github.com/barryvdh/laravel-ide-helper
@@ -11441,6 +11441,13 @@ namespace Laravel\Socialite\Facades {
     }         
 }
     
+namespace App\Helpers {
+
+    class HumanReadable {
+        
+    }         
+}
+    
     
 namespace {
 
@@ -13444,6 +13451,8 @@ namespace {
         }
     
     class Socialite extends \Laravel\Socialite\Facades\Socialite {}
+    
+    class HumanReadable extends \App\Helpers\HumanReadable {}
     
 }
 

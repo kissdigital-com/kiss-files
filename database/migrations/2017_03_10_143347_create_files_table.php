@@ -17,8 +17,10 @@ class CreateFilesTable extends Migration
             $table->increments('id');
             $table->integer('user_id')->unsigned();
             $table->string('access_key');
-            $table->string('original_file_name');
-            $table->string('file_path');
+            $table->string('original_name');
+            $table->string('path');
+            $table->integer('size')->unsigned();
+            $table->integer('downloads')->unsigned();
             $table->timestamps();
         });
     }

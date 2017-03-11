@@ -15,7 +15,16 @@
         }
         body {
             min-height: 100%;
-            background: linear-gradient(to bottom, #1e5799 0%,#7db9e8 100%);
+            background: white;
+        }
+
+        .fileItem {
+            border-bottom: 1px solid #ccc;
+            padding:4px;
+        }
+
+        input {
+            border:none;
         }
     </style>
 </head>

@@ -4,21 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Log;
 use App\Services\ChunkyUploader;
 use App\Services\FileService;
 use Auth;
-use Illuminate\Support\Facades\View;
 
 class UploadController extends Controller
 {
-    /**
-     * @return Response
-     */
-    public function index()
-    {
-        return view('upload')->with('user', Auth::user());
-    }
 
     /**
      * Check if a part of file exists. Needed by resumable.js

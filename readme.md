@@ -19,7 +19,9 @@ Konfiguracja google API:
 2. W konsoli google włącz Google+ API i Google People API?
 
 ## Scripts / helpers
-No helpers
+
+* ```php artisan ide-helper:generate``` (tworzy podpowiedzi klas i metod dla edytora)
+* ```php artisan ide-helper:models``` (tworzy podpowiedzi pól modeli)
 
 ## Running tests ##
 No tests
