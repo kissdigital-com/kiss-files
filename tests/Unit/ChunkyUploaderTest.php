@@ -17,17 +17,25 @@ class ChunkyUploaderTest extends TestCase
 
     public function testAddFileSuffix()
     {
+        $fileName = 'foo/bar/readme.txt.gz';
+        $fileName2 = ChunkyUploader::addSuffixToFilename($fileName, '-2');
+        $this->assertTrue($fileName2 == 'foo/bar/readme-2.txt.gz');
+
         $fileName = 'foo/bar/readme.txt';
         $fileName2 = ChunkyUploader::addSuffixToFilename($fileName, '-2');
         $this->assertTrue($fileName2 == 'foo/bar/readme-2.txt');
+
+        $fileName = 'readme.txt';
+        $fileName2 = ChunkyUploader::addSuffixToFilename($fileName, '.2');
+        $this->assertTrue($fileName2 == 'readme.2.txt');
 
         $fileName = 'foo/bar/readme';
         $fileName2 = ChunkyUploader::addSuffixToFilename($fileName, '-2');
         $this->assertTrue($fileName2 == 'foo/bar/readme-2');
 
-        $fileName = 'readme.txt';
-        $fileName2 = ChunkyUploader::addSuffixToFilename($fileName, '.2');
-        $this->assertTrue($fileName2 == 'readme.2.txt');
+        $fileName = 'readme.';
+        $fileName2 = ChunkyUploader::addSuffixToFilename($fileName, '2');
+        $this->assertTrue($fileName2 == 'readme.2');
     }
 
     public function testMergingFile()

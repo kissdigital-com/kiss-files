@@ -89,9 +89,20 @@ class ChunkyUploader
 
     public static function addSuffixToFilename($filePath, $suffix) : string
     {
-        $extensions = explode('.', $filePath);
-        $extension = end($extensions);
-        return substr($filePath, 0, strlen($filePath) - (strlen($extension) + 1)).$suffix.'.'.$extension;
+        $parts = explode('/', $filePath);
+
+        $lastPart = end($parts);
+        if (($dotPosition = strpos($lastPart, '.')) !== false && strpos($lastPart, '.') !== strlen($lastPart) - 1)
+        {
+            $extensions = substr($lastPart, $dotPosition);
+            $suffixedName = substr($filePath, 0, strlen($filePath) - (strlen($extensions))) . $suffix . $extensions;
+        }
+        else
+        {
+            $suffixedName = $filePath . $suffix;
+        }
+
+        return $suffixedName;
     }
 
     public static function getChunkFilePath(Request $request) : string
