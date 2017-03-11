@@ -9,7 +9,7 @@
 
     @foreach ($files as $file)
         <div class="row fileItem">
-            <div class="col-md-6"><input type="text" style="width:100%" value="{{ $file->path }}"/></div>
+            <div class="col-md-6"><input type="text" style="width:100%" value="{{ action('FilesController@file', [$file->access_key, $file->original_name]) }}"/></div>
             <div class="col-md-1">{{ \App\Helpers\HumanReadable::bytesToHuman($file->size) }}</div>
             <div class="col-md-1">{{ $file->created_at->format('d.m.Y') }}</div>
             <div class="col-md-4">

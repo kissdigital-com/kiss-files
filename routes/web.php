@@ -16,6 +16,7 @@ Route::post('/upload', 'UploadController@chunkUpload');
 Route::get('/upload', 'UploadController@chunkCheck');
 
 Route::get('/', 'FilesController@index')->middleware('auth');
+Route::get('/file/{accessKey}/{fileName?}', 'FilesController@file');
 Route::get('/delete/{accessKey}', 'FilesController@delete')->middleware('auth');
 Route::get('/download/{accessKey}/{fileName?}', 'FilesController@download');
 

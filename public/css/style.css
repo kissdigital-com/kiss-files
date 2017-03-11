@@ -1,0 +1,76 @@
+@font-face {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 100;
+    src: local('Roboto Thin'), local('Roboto-Thin'), url('../fonts/Roboto-Thin.woff') format('woff');
+}
+
+@font-face {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 300;
+    src: local('Roboto Light'), local('Roboto-Light'), url('../fonts/Roboto-Light.woff') format('woff');
+}
+
+@font-face {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Roboto'), local('Roboto-Regular'), url('../fonts/Roboto-Regular.woff') format('woff');
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    height: 100%;
+    margin: 0;
+    background-repeat: no-repeat;
+    background-image: url('/images/background.jpg');
+    background-size: cover;
+    font-family: Roboto;
+}
+
+.center {
+    display: flex;
+    align-items: center;
+    min-height: 90%;
+    width: 100%;
+    justify-content: center;
+}
+
+.center > div {
+    width:100%;
+}
+
+h1 {
+    text-align: center;
+    font-weight: 300;
+    font-size:4em;
+    color: #fff;
+    margin-bottom:20px;
+}
+
+.download {
+    display:block;
+    flex: 1;
+    font-weight:300;
+    background: #fff;
+    color: #444;
+    padding: 10px;
+    font-size: 28px;
+    width: 70%;
+    margin: auto;
+    border: 5px solid #cdd;
+}
+
+.download:hover {
+    color: #444;
+    text-decoration:none;
+}
+
+.download span {
+    float:right;
+    color: #444;
+}

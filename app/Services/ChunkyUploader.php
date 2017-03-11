@@ -90,8 +90,8 @@ class ChunkyUploader
     public static function addSuffixToFilename($filePath, $suffix) : string
     {
         $parts = explode('/', $filePath);
-
         $lastPart = end($parts);
+
         if (($dotPosition = strpos($lastPart, '.')) !== false && strpos($lastPart, '.') !== strlen($lastPart) - 1)
         {
             $extensions = substr($lastPart, $dotPosition);

@@ -23,6 +23,21 @@ class FilesController extends Controller
     /**
      * @return Response
      */
+    public function file($accessKey, $fileName = null)
+    {
+        $file = File::where('access_key', $accessKey)->first();
+
+//        if (!$file || !Storage::exists($file->path))
+//        {
+//            return response('File not found', 404);
+//        }
+
+        return view('file', ['file' => $file]);
+    }
+
+    /**
+     * @return Response
+     */
     public function download($accessKey, $fileName = null)
     {
         $file = File::where('access_key', $accessKey)->first();
