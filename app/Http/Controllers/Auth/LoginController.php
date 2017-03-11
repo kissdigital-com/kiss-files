@@ -29,7 +29,7 @@ class LoginController extends Controller
         $user = Socialite::driver('google')->user();
         $authUser = $this->findOrCreateUser($user, 'google');
         Auth::login($authUser, true);
-        return redirect()->action('UploadController@index');
+        return redirect()->action('FilesController@index');
     }
 
     public function logout()

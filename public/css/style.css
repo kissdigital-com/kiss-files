@@ -41,21 +41,21 @@ body {
 }
 
 .center > div {
-    width:100%;
+    width: 100%;
 }
 
 h1 {
     text-align: center;
     font-weight: 300;
-    font-size:4em;
+    font-size: 4em;
     color: #fff;
-    margin-bottom:20px;
+    margin-bottom: 20px;
 }
 
 .download {
-    display:block;
+    display: block;
     flex: 1;
-    font-weight:300;
+    font-weight: 300;
     background: #fff;
     color: #444;
     padding: 10px;
@@ -67,10 +67,50 @@ h1 {
 
 .download:hover {
     color: #444;
-    text-decoration:none;
+    text-decoration: none;
 }
 
 .download span {
-    float:right;
+    float: right;
     color: #444;
+}
+
+.file {
+    display: block;
+    font-weight: 300;
+    background: #fff;
+    color: #444;
+    padding: 10px;
+    font-size: 20px;
+    width: 96%;
+    margin: auto;
+    margin-bottom: 7px;
+}
+
+.file input {
+    border: none;
+    width: 100%;
+    background: none;
+}
+
+
+.file .size, .file .actions {
+    text-align:right;
+    white-space: nowrap;
+}
+
+.upload {
+    text-align: center;
+    xfont-style: italic;
+    font-size: 28px;
+    margin: 0px;
+    padding: 20px;
+    border: 4px solid #eee;
+}
+
+.logout {
+    display: block;
+    text-align:right;
+    width:96%;
+    padding: 8px 0px;
 }

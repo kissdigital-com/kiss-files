@@ -7,7 +7,9 @@
 </head>
 <body>
 
-<a href="{{ action('Auth\LoginController@logout') }}">Wyloguj</a>
+<div class="logout">
+    <a href="{{ action('Auth\LoginController@logout') }}">Wyloguj</a>
+</div>
 
 @yield('content')
 

@@ -21,7 +21,13 @@ class FileService
         $file->downloads = 0;
         $file->save();
 
-        return self::downloadURL($file);
+        return self::fileURL($file);
+    }
+
+    public static function fileURL(File $file) : string
+    {
+        $url = action('FilesController@file', [$file->access_key, $file->original_name]);
+        return $url;
     }
 
     public static function downloadURL(File $file) : string

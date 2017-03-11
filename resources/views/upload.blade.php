@@ -1,27 +1,30 @@
 @extends('layout')
 
 @section('content')
-    <h1>Hello {{ $user->name }}</h1>
+    <h1>Hola {{ $user->name }}</h1>
 
-    <div class="resumable-drop" id="browseButton" style="width:500px;height:400px;border:1px solid red;">
-        Drop files here to upload or <a class="resumable-browse"><u>select from your computer</u></a>
-    </div>
-
-    @foreach ($files as $file)
-        <div class="row fileItem">
-            <div class="col-md-6"><input type="text" style="width:100%" value="{{ action('FilesController@file', [$file->access_key, $file->original_name]) }}"/></div>
-            <div class="col-md-1">{{ \App\Helpers\HumanReadable::bytesToHuman($file->size) }}</div>
-            <div class="col-md-1">{{ $file->created_at->format('d.m.Y') }}</div>
-            <div class="col-md-4">
-                <a href="{{ \App\Services\FileService::downloadURL($file) }}">Pobierz</a>
-                <a href="{{ action('FilesController@delete', [$file->access_key]) }}">Usuń</a></div>
+    <div class="row file" id="browseButton">
+        <div class="upload">
+            To upload another file drop it here or <a class="resumable-browse"><u>select from your computer</u></a>
         </div>
-    @endforeach
+    </div>
 
     <div id="fileList">
-
+        @foreach ($files as $file)
+            <div class="row file fileTemplate">
+                <div class="col-sm-6">
+                    <input type="text" class="path" value="{{ $file->original_name }}"
+                           onclick="this.value = $(this).data('url'); this.select()"
+                           data-url="{{ action('FilesController@file', [$file->access_key, $file->original_name]) }}"/>
+                </div>
+                <div class="col-sm-2 size">{{ \App\Helpers\HumanReadable::bytesToHuman($file->size) }}</div>
+                <div class="col-sm-1 date">{{ $file->created_at->format('d.m.Y') }}</div>
+                <div class="col-sm-3 actions">
+                    <a href="{{ \App\Services\FileService::downloadURL($file) }}">Pobierz</a>
+                    <a href="{{ action('FilesController@delete', [$file->access_key]) }}">Usuń</a></div>
+            </div>
+        @endforeach
     </div>
-
 
 @endsection
 
@@ -33,18 +36,28 @@
         class FileList {
 
             add(file) {
-                var html = '<div class="row"><div class="col-md-8">' + file.fileName + '</div><div class="col-md-4">Trwa ładowanie</div></div>';
-                html += '<div class="row" id="progress-' + file.uniqueIdentifier + '" style="height:4px;background:red;"></div>';
-                return html;
+                var rowTemplate = $('.fileTemplate').first().clone();
+                $(rowTemplate).children('.size').text('0%');
+                $(rowTemplate).children('.date').text('');
+                $(rowTemplate).find('.path').val(file.fileName);
+                $(rowTemplate).children('.actions').text('Uploading...');
+                $(rowTemplate).css('background','linear-gradient(90deg, #EAD8D8 0%, #fff 0%)');
+
+                file.row = rowTemplate;
+
+                return rowTemplate;
             }
 
             progress(file) {
                 var progress = Math.floor(file.progress() * 100);
-                $('#progress-' + file.uniqueIdentifier).css('width', progress + '%');
+                $(file.row).css('background','linear-gradient(90deg, #EAD8D8 '+progress+'%, #fff '+(progress+5)+'%)');
+                $(file.row).children('.size').text(progress+'%');
             }
 
             completed(file, result) {
-                alert(result.url);
+                $(file.row).find('.path').val(result.url);
+                $(file.row).find('.path').data('url', result.url);
+                $(file.row).children('.actions').text('Upload successful!');
             }
         }
 
@@ -62,7 +75,7 @@
         r.assignBrowse(document.getElementById('browseButton'));
 
         r.on('fileAdded', function (file, event) {
-            $('#fileList').append(fileList.add(file));
+            $('#fileList').prepend(fileList.add(file));
             r.upload();
             console.debug('fileAdded', event);
         });
