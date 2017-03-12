@@ -16,7 +16,7 @@
 
     <div id="fileList">
         @foreach ($files as $file)
-            <div class="row file fileTemplate">
+            <div class="row file">
                 <div class="col-sm-6">
                     <input type="text" class="path" readonly="readonly" value="{{ $file->original_name }}"
                            onclick="this.value = $(this).data('url'); this.select()"
@@ -31,6 +31,19 @@
         @endforeach
     </div>
 
+    <!-- TODO to jest głupie póki co rozwiązanie -->
+    <div style="display:none">
+        <div class="row file fileTemplate">
+            <div class="col-sm-6">
+                <input type="text" class="path" readonly="readonly" value=""
+                       onclick="this.value = $(this).data('url'); this.select()"
+                       data-url=""/>
+            </div>
+            <div class="col-sm-2 size"></div>
+            <div class="col-sm-1 date"></div>
+            <div class="col-sm-3 actions"></div>
+        </div>
+    </div>
 @endsection
 
 @section('scripts')
