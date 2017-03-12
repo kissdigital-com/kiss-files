@@ -15,7 +15,7 @@ class ChunkyUploader
         return Storage::has(self::getChunkFilePath($request));
     }
 
-    public static function storeChunk(Request $request) : void
+    public static function storeChunk(Request $request)
     {
         $uploadedFile = $request->file('file');
         $uploadedFile->storeAs(self::getChunkDirectory($request), self::getChunkFileName($request));
@@ -69,7 +69,7 @@ class ChunkyUploader
         return $targetFilePath;
     }
 
-    public static function clean(Request $request) : void
+    public static function clean(Request $request)
     {
         Storage::deleteDirectory(self::getChunkDirectory($request));
     }

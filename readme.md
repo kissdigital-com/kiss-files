@@ -9,14 +9,30 @@ Realizuję projekt gdyż:
 * cel inny - zrobić z tego potem projekt opensource
 
 ## Requirements ##
-1. Projekt używa https://github.com/23/resumable.js do uploadowania dużych plików w kawałkach
+
+1. PHP7
 
 ## How to install ##
+
+1. `composer install`
+2. `cp .env.example .env`
+3. `vi .env` i podać dane dostępowe do bazy
+4. `php artisan migrate` - tworzy tabele w bazie
+5. `php artisan key:generate` - wygenerowanie klucza do szyfrowania
+6. `chmod -R g+w storage` - innymi słowy dać apachowi prawo do zapisu do katalogu storage i tego co jest w nim
 
 Konfiguracja google API:
 
 1. W konsoli google utwórz `Oauth2 client ID` w `Create credentials` i ustaw odpowiedni adres dla callback
 2. W konsoli google włącz Google+ API i Google People API?
+
+W pliku `config/services.php` ustaw client id i secret:
+
+    'google' => [
+        'client_id' => 'SOMESOMESOME.apps.googleusercontent.com',
+        'client_secret' => 'SOMESECRET',
+        'redirect' => 'http://files.kissdigital.com/login/google/callback',
+    ],
 
 ## Scripts / helpers
 
@@ -24,12 +40,17 @@ Konfiguracja google API:
 * ```php artisan ide-helper:models``` (tworzy podpowiedzi pól modeli)
 
 ## Running tests ##
-No tests
+
+1. `phpunit` starts tests in `./tests`
 
 ## Files structure ##
 No non-common file structure
 
 ## Most vital files ##
+
+## Libraries used ##
+1. Projekt używa https://github.com/23/resumable.js do uploadowania dużych plików w kawałkach
+
 ## Links ##
 No links
 

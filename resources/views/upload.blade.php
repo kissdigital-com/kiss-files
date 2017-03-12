@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="logout">
-        <a href="{{ action('Auth\LoginController@logout') }}">Wyloguj</a>
+        <a href="{{ action('Auth\LoginController@logout') }}">Logout</a>
     </div>
 
     <h1 style="text-align:center;margin-top:40px;">¡Hola {{ $user->name }}!</h1>
@@ -25,8 +25,8 @@
                 <div class="col-sm-2 size">{{ \App\Helpers\HumanReadable::bytesToHuman($file->size) }}</div>
                 <div class="col-sm-1 date">{{ $file->created_at->format('d.m.Y, H:i') }}</div>
                 <div class="col-sm-3 actions">
-                    <a href="{{ \App\Services\FileService::downloadURL($file) }}">Pobierz</a>
-                    <a href="{{ action('FilesController@delete', [$file->access_key]) }}">Usuń</a></div>
+                    <a href="{{ \App\Services\FileService::downloadURL($file) }}">Get it</a>&nbsp;&nbsp;
+                    <a href="{{ action('FilesController@delete', [$file->access_key]) }}">Delete!</a></div>
             </div>
         @endforeach
     </div>

@@ -63,7 +63,7 @@ class ChunkyUploaderTest extends TestCase
         $this->assertTrue($size == 30);
     }
 
-    private function prepareTestDir() : void
+    private function prepareTestDir()
     {
         $data = '0123456789';
         Storage::deleteDirectory(self::TEST_DIRECTORY);
