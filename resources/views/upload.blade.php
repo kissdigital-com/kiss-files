@@ -1,11 +1,16 @@
 @extends('layout')
 
 @section('content')
-    <h1>Hola {{ $user->name }}</h1>
+    <div class="logout">
+        <a href="{{ action('Auth\LoginController@logout') }}">Wyloguj</a>
+    </div>
 
-    <div class="row file" id="browseButton">
+    <h1 style="text-align:center;margin-top:40px;">¡Hola {{ $user->name }}!</h1>
+
+    <div class="uploadField" id="dropField">
         <div class="upload">
-            To upload another file drop it here or <a class="resumable-browse"><u>select from your computer</u></a>
+            To upload another file, drop it here or <a class="resumable-browse" id="browseButton">select from your
+                computer</a>.
         </div>
     </div>
 
@@ -13,12 +18,12 @@
         @foreach ($files as $file)
             <div class="row file fileTemplate">
                 <div class="col-sm-6">
-                    <input type="text" class="path" value="{{ $file->original_name }}"
+                    <input type="text" class="path" readonly="readonly" value="{{ $file->original_name }}"
                            onclick="this.value = $(this).data('url'); this.select()"
                            data-url="{{ action('FilesController@file', [$file->access_key, $file->original_name]) }}"/>
                 </div>
                 <div class="col-sm-2 size">{{ \App\Helpers\HumanReadable::bytesToHuman($file->size) }}</div>
-                <div class="col-sm-1 date">{{ $file->created_at->format('d.m.Y') }}</div>
+                <div class="col-sm-1 date">{{ $file->created_at->format('d.m.Y, H:i') }}</div>
                 <div class="col-sm-3 actions">
                     <a href="{{ \App\Services\FileService::downloadURL($file) }}">Pobierz</a>
                     <a href="{{ action('FilesController@delete', [$file->access_key]) }}">Usuń</a></div>
@@ -33,6 +38,15 @@
 
     <script>
 
+        $(document).ready(function () {
+            $('.uploadField').on('dragover', function () {
+                $('.uploadField').addClass('drop');
+            });
+            $('.uploadField').on('dragleave', function () {
+                $('.uploadField').removeClass('drop');
+            });
+        });
+
         class FileList {
 
             add(file) {
@@ -41,7 +55,6 @@
                 $(rowTemplate).children('.date').text('');
                 $(rowTemplate).find('.path').val(file.fileName);
                 $(rowTemplate).children('.actions').text('Uploading...');
-                $(rowTemplate).css('background','linear-gradient(90deg, #EAD8D8 0%, #fff 0%)');
 
                 file.row = rowTemplate;
 
@@ -50,11 +63,12 @@
 
             progress(file) {
                 var progress = Math.floor(file.progress() * 100);
-                $(file.row).css('background','linear-gradient(90deg, #EAD8D8 '+progress+'%, #fff '+(progress+5)+'%)');
-                $(file.row).children('.size').text(progress+'%');
+                $(file.row).css('background', 'linear-gradient(90deg, #00BED3 ' + progress + '%, #fff ' + (progress) + '%)');
+                $(file.row).children('.size').text(progress + '%');
             }
 
             completed(file, result) {
+                $(file.row).addClass('uploadSuccessful');
                 $(file.row).find('.path').val(result.url);
                 $(file.row).find('.path').data('url', result.url);
                 $(file.row).children('.actions').text('Upload successful!');
@@ -73,6 +87,7 @@
         });
 
         r.assignBrowse(document.getElementById('browseButton'));
+        r.assignDrop(document.getElementById('dropField'));
 
         r.on('fileAdded', function (file, event) {
             $('#fileList').prepend(fileList.add(file));
