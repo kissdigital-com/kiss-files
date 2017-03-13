@@ -10,7 +10,6 @@ class HumanReadable
 
         if ($bytes > 0)
         {
-            $bytes = (int)$bytes;
             $base = log($bytes) / log(1024);
             $suffixes = array(' bytes', ' kB', ' MB', ' GB', ' TB');
 

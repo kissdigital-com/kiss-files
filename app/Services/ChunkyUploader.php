@@ -36,6 +36,8 @@ class ChunkyUploader
 
     public static function mergeUploadedFile(Request $request) : string
     {
+        set_time_limit(0);
+
         $resumableTotalChunks = $request->input('resumableTotalChunks', 0);
         $resumableFilename =  $request->input('resumableFilename', '');
 
