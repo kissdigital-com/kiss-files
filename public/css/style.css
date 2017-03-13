@@ -98,8 +98,8 @@ button:hover, a.button:hover {
     font-weight: 300;
     background: #fff;
     font-size: 18px;
-    margin: 0px auto 4px auto;
-    padding: 16px 0px 4px 0px;
+    margin: 12px auto 4px auto;
+    padding: 4px 0px 4px 0px;
     border-bottom: 1px solid #a8aeb3;
     transition-property: background, color;
     transition-duration: .4s

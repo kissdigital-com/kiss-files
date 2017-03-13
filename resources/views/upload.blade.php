@@ -64,9 +64,11 @@
 
             add(file) {
                 var rowTemplate = $('.fileTemplate').first().clone();
+                $(rowTemplate).removeClass('fileTemplate');
                 $(rowTemplate).children('.size').text('0%');
                 $(rowTemplate).children('.date').text('');
                 $(rowTemplate).find('.path').val(file.fileName);
+                $(rowTemplate).find('.path').data('url', file.fileName);
                 $(rowTemplate).children('.actions').text('Uploading...');
 
                 file.row = rowTemplate;
@@ -103,9 +105,9 @@
         r.assignDrop(document.getElementById('dropField'));
 
         r.on('fileAdded', function (file, event) {
+            $('.uploadField').removeClass('drop');
             $('#fileList').prepend(fileList.add(file));
             r.upload();
-            console.debug('fileAdded', event);
         });
 
         r.on('fileProgress', function (file) {

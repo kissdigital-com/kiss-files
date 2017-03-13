@@ -62,7 +62,9 @@ No test data
 ## Tips and tricks ##
 
 1. Jeżeli uruchamiasz serwis lokalnie to aby działało uwierzytelnianie z google, postaw go pod nie-lokalną domeną, a w swoim /etc/hosts podaje tylko lokalne IP. Rzecz w tym, że po uwierzytelnieniu google przekierowuje użytkownika na wskazany adres - ale nie może on być lokalny.
-2. Na 'producio' korzystam z tego tak, że pliki zapisują się na dysku sieciowym (NFS). Montowanie: `sudo mount 192.168.1.5:/volume1/Files /var/www/files.kissdigital.com/web/storage/app` 
+2. Na 'producio' korzystam z tego tak, że pliki zapisują się na dysku sieciowym (NFS). Montowanie: `sudo mount 192.168.1.5:/volume1/Files /var/www/files.kissdigital.com/web/storage/app`
+3. Podłączenie dysku w trakcie uruchamiania serwera - w pliku /etc/fstab dodaj coś jak to:
+`192.168.1.5:/volume1/Files /var/www/files.kissdigital.com/web/storage/app nfs rw,hard,intr,rsize=8192,wsize=8192,timeo=14 0 0`
 
 ## Contributors ##
 Adam Kubiczek
