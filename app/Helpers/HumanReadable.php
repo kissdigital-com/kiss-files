@@ -4,17 +4,19 @@ namespace App\Helpers;
 
 class HumanReadable
 {
-    public static function bytesToHuman($bytes, $precision = 1)
+    public static function bytesToHuman(float $bytes, int $precision = 1) : string
     {
+        $result = '0 bytes';
+
         if ($bytes > 0)
         {
             $bytes = (int)$bytes;
             $base = log($bytes) / log(1024);
-            $suffixes = array(' bytes', ' KB', ' MB', ' GB', ' TB');
+            $suffixes = array(' bytes', ' kB', ' MB', ' GB', ' TB');
 
-            return round(pow(1024, $base - floor($base)), $precision) . $suffixes[floor($base)];
+            $result = round(pow(1024, $base - floor($base)), $precision) . $suffixes[floor($base)];
         }
 
-        return $bytes;
+        return $result;
     }
 }

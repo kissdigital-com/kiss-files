@@ -74,7 +74,7 @@ class ChunkyUploader
         Storage::deleteDirectory(self::getChunkDirectory($request));
     }
 
-    public static function countDirectorySize($directory) : int
+    public static function countDirectorySize($directory) : float
     {
         $files = Storage::files($directory);
         $calculatedSize = 0;
