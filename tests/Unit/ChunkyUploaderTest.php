@@ -2,6 +2,7 @@
 
 namespace Tests\Unit;
 
+use App\Services\FileService;
 use Illuminate\Http\Request;
 use Tests\TestCase;
 use App\Services\ChunkyUploader;
@@ -61,6 +62,17 @@ class ChunkyUploaderTest extends TestCase
         $this->cleanTestDir();
 
         $this->assertTrue($size == 30);
+    }
+
+    public function testFileSize()
+    {
+        $this->prepareTestDir();
+
+        $size = FileService::realFileSize(storage_path('app/'.self::TEST_DIRECTORY.'/'.self::TEST_FILES[0]));
+
+        $this->cleanTestDir();
+
+        $this->assertTrue($size == 10);
     }
 
     private function prepareTestDir()
