@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Storage;
 
 class FileService
 {
-    public static function storeUploadedFile(string $originalFileName, string $filePath, User $user) : string
+    public static function storeUploadedFile(string $originalFileName, string $filePath, User $user) : File
     {
         $accessKey = self::makeAccessKey();
 
@@ -21,7 +21,7 @@ class FileService
         $file->downloads = 0;
         $file->save();
 
-        return self::fileURL($file);
+        return $file;
     }
 
     public static function fileURL(File $file) : string

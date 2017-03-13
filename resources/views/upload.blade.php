@@ -86,6 +86,8 @@
                 $(file.row).addClass('uploadSuccessful');
                 $(file.row).find('.path').val(result.url);
                 $(file.row).find('.path').data('url', result.url);
+                $(file.row).find('.size').text(result.size);
+                $(file.row).find('.date').text(result.created_at);
                 $(file.row).children('.actions').text('Upload successful!');
             }
         }

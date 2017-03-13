@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\HumanReadable;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Services\ChunkyUploader;
@@ -40,8 +42,11 @@ class UploadController extends Controller
             $filePath = ChunkyUploader::mergeUploadedFile($request);
             ChunkyUploader::clean($request);
 
-            $downloadURL = FileService::storeUploadedFile($request->input('resumableFilename'), $filePath, Auth::user());
-            return response()->json(['url' => $downloadURL]);
+            $file = FileService::storeUploadedFile($request->input('resumableFilename'), $filePath, Auth::user());
+            $downloadURL = FileService::downloadURL($file);
+            $size = HumanReadable::bytesToHuman($file->size);
+            $created_at = $file->created_at->format('d.m.Y, H:i');
+            return response()->json(['size' => $size, 'created_at' => $created_at, 'url' => $downloadURL]);
         }
 
         return response('File received', 200);
