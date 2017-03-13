@@ -20,6 +20,6 @@ Route::get('/file/{accessKey}/{fileName?}', 'FilesController@file');
 Route::get('/delete/{accessKey}', 'FilesController@delete')->middleware('auth');
 Route::get('/download/{accessKey}/{fileName?}', 'FilesController@download');
 
-Route::get('logout', 'Auth\LoginController@logout')->middleware('auth');
+Route::get('logout', 'Auth\LoginController@logout');
 Route::get('login/google', 'Auth\LoginController@redirectToProvider')->name('login');
 Route::get('login/google/callback', 'Auth\LoginController@handleProviderCallback');

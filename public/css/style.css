@@ -63,6 +63,10 @@ h2 strong {
     font-weight: 300;
 }
 
+.blue {
+    color: #00BED3;
+}
+
 a:link, a:visited {
     color: #00BED3;
 }
