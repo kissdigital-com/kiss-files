@@ -48,31 +48,11 @@ class FileService
      */
     public static function realFileSize(string $filePath): float
     {
-        $fp = fopen($filePath, 'r');
-
-        if (!$fp) {
-            return 0;
-        }
-
-        $pos = 0.0;
-        $size = 1073741824.0;
-        fseek($fp, 0, SEEK_SET);
-
-        while ($size > 1) {
-            fseek($fp, $size, SEEK_CUR);
-
-            if (fgetc($fp) === false) {
-                fseek($fp, -$size, SEEK_CUR);
-                $size = (int)($size / 2);
-            } else {
-                fseek($fp, -1, SEEK_CUR);
-                $pos += $size;
-            }
-        }
-
-        while (fgetc($fp) !== false) $pos++;
-        fclose($fp);
-        return $pos;
+        $line = exec('ls -l '.escapeshellarg($filePath));
+        $line = preg_replace('!\s+!', ' ', $line);
+        $elements = explode(' ', $line);
+        $size = (float)$elements[4];
+        return $size;
     }
 
     protected static function makeAccessKey(): string
