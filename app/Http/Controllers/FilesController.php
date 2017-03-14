@@ -21,16 +21,18 @@ class FilesController extends Controller
     }
 
     /**
+     * @param $accessKey
+     * @param null $fileName
      * @return Response
      */
     public function file($accessKey, $fileName = null)
     {
         $file = File::where('access_key', $accessKey)->first();
 
-//        if (!$file || !Storage::exists($file->path))
-//        {
-//            return response('File not found', 404);
-//        }
+        if (!$file || !Storage::exists($file->path))
+        {
+            return response('File not found', 404);
+        }
 
         return view('file', ['file' => $file]);
     }
@@ -47,6 +49,9 @@ class FilesController extends Controller
         {
             return response('File not found', 404);
         }
+
+        $file->downloads++;
+        $file->save();
 
         $filePath = config('filesystems.disks.local.root').'/'.$file->path;
 
