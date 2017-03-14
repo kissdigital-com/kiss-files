@@ -36,9 +36,10 @@ class FilesController extends Controller
     }
 
     /**
+     * @param $accessKey
      * @return Response
      */
-    public function download($accessKey, $fileName = null)
+    public function download($accessKey)
     {
         $file = File::where('access_key', $accessKey)->first();
 
@@ -48,7 +49,12 @@ class FilesController extends Controller
         }
 
         $filePath = config('filesystems.disks.local.root').'/'.$file->path;
-        return response()->download($filePath, $fileName);
+
+        //ze względu na to, że system jest przeznaczony do obsługi wielkich plików, pobieranie pliku z serwera jest delegowane na dedykowany moduł apacha (mod_xsendfile)
+        return response('OK', 200)
+            ->header('Content-Type', 'application/force-download')
+            ->header('Content-Disposition', 'attachment; filename="'.$file->original_name.'"')
+            ->header('X-Sendfile', $filePath);
     }
 
     public function delete($accessKey)

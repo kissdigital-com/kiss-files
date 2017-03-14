@@ -21,6 +21,7 @@ class FileService
         if (PHP_INT_SIZE >= 8) {
             $file->size = Storage::size($filePath);
         } else {
+            //na systemach 32 bit nie możemy wykorzystać wbudowanego w PHP sprawdzania wielkości plików, bo dla plików >2GB zwraca nieprawidłowe wartości
             $file->size = self::realFileSize(storage_path('app/'.$filePath));
         }
         $file->downloads = 0;

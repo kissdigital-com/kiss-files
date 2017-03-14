@@ -11,6 +11,7 @@ Realizuję projekt gdyż:
 ## Requirements ##
 
 1. PHP7
+2. Apache z modułem mod_xsendfile
 
 ## How to install ##
 
@@ -33,6 +34,14 @@ W pliku `config/services.php` ustaw client id i secret:
         'client_secret' => 'SOMESECRET',
         'redirect' => 'http://files.kissdigital.com/login/google/callback',
     ],
+
+Konfiguracja modułu mod_xsendfile
+Do konfiguracji vhosta należy dopisać dyrektywy (podać odpowiednią ściężkę do folderu z plikami):
+
+```
+   XSendFile On
+   XSendFilePath /Users/kubik/Work/web-kissfiles/storage/app/uploads/
+  ```
 
 ## Scripts / helpers
 
