@@ -1,17 +1,19 @@
-KISSfiles
+KISS-files
 ==============
-Fileuploader do udostępniania dużych plików na zewnątrz.
+The script for sharing files.
+This tool is intended for companies who wants share their files between employees, customers, partners etc.
 
-## Reason ##
-Realizuję projekt gdyż:
-* cel edukacyjny - zapoznać się lepiej z Laravel, PHP7
-* cel marketingowy - korzystając z własnego narzędzia zamiast z sendspace i innych pokazujemy klientom naszą markę
-* cel inny - zrobić z tego potem projekt opensource
+Most important features:
+
+1. To share a file an user must be authenticated.
+2. Anyone with a link can download a file.
+3. No file size limits even on 32 bit systems.
 
 ## Requirements ##
 
-1. PHP7
-2. Apache z modułem mod_xsendfile
+1. PHP7 or newer
+2. Apache server with mod_xsendfile installed.
+3. A database engine (tested with MySQL)
 
 ## How to install ##
 
@@ -57,8 +59,8 @@ No non-common file structure
 
 ## Most vital files ##
 
-## Libraries used ##
-1. Projekt używa https://github.com/23/resumable.js do uploadowania dużych plików w kawałkach
+## Extra libraries used ##
+1. https://github.com/23/resumable.js for uploading files
 
 ## Links ##
 No links
@@ -75,5 +77,5 @@ No test data
 3. Podłączenie dysku w trakcie uruchamiania serwera - w pliku /etc/fstab dodaj coś jak to:
 `192.168.1.5:/volume1/Files /var/www/files.kissdigital.com/web/storage/app nfs rw,hard,intr,rsize=8192,wsize=8192,timeo=14 0 0`
 
-## Contributors ##
-Adam Kubiczek
+## License ##
+MIT
